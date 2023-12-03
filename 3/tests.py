@@ -27,3 +27,11 @@ class TestAll(unittest.TestCase):
 
     def test_main(self):
         print(foo.main(test_doc))
+
+
+class TestPart2(unittest.TestCase):
+    def test_stars(self):
+        print(foo.find_stars(test_doc))
+
+    def test_main_2(self):
+        print(foo.main_part_2(test_doc))
