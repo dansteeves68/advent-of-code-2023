@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import bar
 import foo
 import unittest
 
@@ -17,5 +18,7 @@ class TestAll(unittest.TestCase):
     def test_main_part_1(self):
         self.assertEqual(foo.main_part_1(doc=test_doc), 6440)
 
+
+class TestJokers(unittest.TestCase):
     def test_main_part_2(self):
-        self.assertEqual(foo.main_part_2(doc=test_doc), 5905)
+        self.assertEqual(bar.main_part_2(doc=test_doc), 5905)
