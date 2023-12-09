@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "foo"
+version = "0.1.0"
+description = "day 8"
+authors = ["Dan Steeves <dan@thesteeves.org>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+binarytree = "^6.5.1"
+
+
+[tool.poetry.group.dev.dependencies]
+binarytree = "^6.5.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
