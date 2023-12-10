@@ -1,0 +1,6 @@
+# TODO
+
+- reverse the order of the list of maps
+- write a ReverseMapper class to init with map
+- and with a function input(output)
+- in main, start with zero, loop through all the mappers, test output
