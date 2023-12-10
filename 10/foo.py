@@ -10,6 +10,8 @@ class Pipes:
         self.grid = {}
         self.s = ()
         self.loop = []
+        self.y = None
+        self.x = None
 
     def __repr__(self):
         return repr((self.s, self.loop))
@@ -17,12 +19,42 @@ class Pipes:
     def len(self):
         return math.ceil(len(self.loop) / 2)
 
+    def is_interior(self, point):
+        edges = self.loop
+        edges.append(self.s)
+        y, x = point
+        n = [(a, x) for a in range(0, y)]
+        s = [(a, x) for a in range(y + 1, self.y)]
+        e = [(y, a) for a in range(x + 1, self.x)]
+        w = [(y, a) for a in range(0, x)]
+        crosses = []
+        for c in [n, s, e, w]:
+            c = [a for a in c if a in edges]
+            crosses.append(c)
+        if min([len(a) % 2 for a in crosses]) == 0:
+            return False
+        else:
+            return True
+
+    def count_interior(self):
+        edges = self.loop
+        edges.append(self.s)
+        interior = 0
+        for y in range(0, self.y):
+            for x in range(0, self.x):
+                print(y, " of ", self.y, " and ", x, " of ", self.x)
+                if (y, x) not in edges:
+                    if self.is_interior((y, x)):
+                        interior += 1
+        return interior
+
     def map(self):
         for y, line in enumerate(self.doc.split("\n")):
             for x, char in enumerate(line):
                 self.grid[(y, x)] = char
                 if char == "S":
                     self.s = (y, x)
+                self.y, self.x = y + 1, x + 1
 
     north = (-1, 0)
     south = (1, 0)
@@ -64,10 +96,16 @@ class Pipes:
                 return next
 
 
-if __name__ == "__main__":
+def main_part_1():
     with open("data.txt", "r") as f:
         doc = f.read().strip()
     p = Pipes(doc=doc)
     p.map()
     p.route()
     print("Result Part 1: ", p.len())
+    print("Result Part 2: ", p.count_interior())
+    return p.len()
+
+
+if __name__ == "__main__":
+    main_part_1()
