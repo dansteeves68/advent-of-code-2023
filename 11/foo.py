@@ -2,8 +2,9 @@
 
 
 class Universe:
-    def __init__(self, data):
+    def __init__(self, data, multiplier=1):
         self.data = data
+        self.multiplier = multiplier
         self.y = 0
         self.x = 0
         self.empty_y = []
@@ -35,9 +36,9 @@ class Universe:
                 )
                 y_travel_ = [a for a in y_travel if a in self.empty_y]
                 x_travel_ = [a for a in x_travel if a in self.empty_x]
-                y_travel = len(y_travel) + len(y_travel_)
+                y_travel = len(y_travel) + len(y_travel_) * self.multiplier
                 self.sum_of_shortest_paths += y_travel
-                x_travel = len(x_travel) + len(x_travel_)
+                x_travel = len(x_travel) + len(x_travel_) * self.multiplier
                 self.sum_of_shortest_paths += x_travel
 
 
@@ -46,12 +47,13 @@ def get_data(fname):
         return f.read().strip()
 
 
-def main_part_1(fname):
+def main_part_1(fname, multiplier=1):
     data = get_data(fname=fname)
-    u = Universe(data=data)
+    u = Universe(data=data, multiplier=multiplier)
     u.parse()
     return u.sum_of_shortest_paths
 
 
 if __name__ == "__main__":
     print("Result Part 1: ", main_part_1(fname="data.txt"))
+    print("Result Part 2: ", main_part_1(fname="data.txt", multiplier=999999))

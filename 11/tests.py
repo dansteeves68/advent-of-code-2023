@@ -20,6 +20,12 @@ class TestAll(unittest.TestCase):
     def test_main_part_1(self):
         self.assertEqual(foo.main_part_1(fname="td1.txt"), 374)
 
+    def test_main_part_2(self):
+        self.assertEqual(foo.main_part_1(fname="td1.txt", multiplier=9), 1030)
+
+    def test_main_part_2_(self):
+        self.assertEqual(foo.main_part_1(fname="td1.txt", multiplier=99), 8410)
+
     def test_get_data(self):
         self.assertEqual(foo.get_data(fname="td1.txt"), td1)
 
@@ -32,3 +38,11 @@ class TestAll(unittest.TestCase):
         )
         self.assertEqual(u.empty_y, [3, 7])
         self.assertEqual(u.empty_x, [2, 5, 8])
+
+    def test_part_1(self):
+        self.assertEqual(foo.main_part_1(fname="data.txt", multiplier=1), 9312968)
+
+    def test_part_1(self):
+        self.assertEqual(
+            foo.main_part_1(fname="data.txt", multiplier=999999), 597714117556
+        )
