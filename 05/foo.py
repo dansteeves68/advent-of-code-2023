@@ -25,8 +25,19 @@ def parser(document):
     maps = [[[int(c) for c in a.split()] for a in b] for b in maps]
     return seeds, maps
 
+def transform(val, maps)
+:
+def transformer(val, maps):
+    seed = val
+    for map in reversed(maps):
+        seed = transform(seed, map)
+    return seed
 
-def main(fname):
+
+def main(fname, max=50):
     document = get_document(fname)
     seeds, maps = parser(document=document)
-    return 0
+    for i in range(0, max):
+        if is_seed(transformer(i, maps)):
+            return i
+    return False
