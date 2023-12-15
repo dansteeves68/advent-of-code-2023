@@ -14,6 +14,11 @@ def test_for_mirror(mirror: int, pattern: list) -> bool:
     return True
 
 
+def test_pattern_smudge(pattern: list) -> int:
+    """now we need to test if two lines are equal or only differ by one character"""
+    return 0
+
+
 def test_pattern(pattern: list):
     # Test for horizontal mirrors by walking the rows
     for i in range(0, len(pattern) - 1):
@@ -35,9 +40,12 @@ class Mirrors:
         self.patterns = [a.split("\n") for a in self.data.split("\n\n")]
         self.h_mirrors = []
         self.v_mirrors = []
+        self.h_mirrors_smudge = []
+        self.v_mirrors_smudge = []
 
         for pattern in self.patterns:
             self.h_mirrors.append(test_pattern(pattern=pattern))
+            self.h_mirrors.append(test_pattern_smudge(pattern=pattern))
             # Rotate pattern to test vertical
             pattern_ = [
                 [pattern[y][x] for y in range(0, len(pattern))]
@@ -45,10 +53,14 @@ class Mirrors:
             ]
             # print(pattern_)
             self.v_mirrors.append(test_pattern(pattern=pattern_))
+            self.v_mirrors.append(test_pattern_smudge(pattern=pattern_))
 
         self.h_score = sum(self.h_mirrors) * 100
         self.v_score = sum(self.v_mirrors)
         self.total_score = self.h_score + self.v_score
+        self.h_score_smudge = sum(self.h_mirrors_smudge) * 100
+        self.v_score_smudge = sum(self.v_mirrors_smudge)
+        self.total_score_smudge = self.h_score_smudge + self.v_score_smudge
 
     def __repr__(self):
         return repr(self.h_mirrors)

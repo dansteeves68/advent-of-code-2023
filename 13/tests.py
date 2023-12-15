@@ -30,7 +30,7 @@ class TestAll(unittest.TestCase):
 
     def test_debug(self):
         m = foo.Mirrors(data=td1)
-        m.debug()
+        # m.debug()
 
     def test_part_1(self):
         data = foo.get_data(fname="data.txt")
