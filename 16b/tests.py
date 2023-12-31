@@ -20,4 +20,4 @@ class TestAll(unittest.TestCase):
     def test_part_1(self):
         with open("data.txt", "r") as f:
             data = f.read().strip()
-        self.assertEqual(foo.main_part_1(data=data), 0)
+        self.assertEqual(foo.main_part_1(data=data), 7210)
