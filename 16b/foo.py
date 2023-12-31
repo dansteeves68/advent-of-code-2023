@@ -8,7 +8,6 @@ def progress_beam(beam):
     bp, bv = beam
     next_position = (bp[0] + bv[0], bp[1] + bv[1])
     next_char = position.get(next_position, {}).get("char", False)
-    print("Next position & char: ", next_position, next_char)
 
     # grid boundary
     if not next_char:
@@ -18,7 +17,6 @@ def progress_beam(beam):
         return []
     # else mark next position seen
     else:
-        print(position.get(next_position).get("seen_heading"))
         position[next_position]["seen_heading"].append(bv)
 
     # continue
@@ -44,23 +42,61 @@ def progress_beam(beam):
         return [(next_position, south)]
 
 
+def main_part_2(data):
+    global position
+    max_y = 0
+    max_x = 0
+    position = dict()
+    for y, line in enumerate(data.strip().split("\n")):
+        if y > max_y:
+            max_y = y
+        for x, char in enumerate(line):
+            if x > max_x:
+                max_x = x
+            position[y, x] = {"char": char, "seen_heading": []}
+
+    start_beams = [((y, 0), east) for y in range(0, max_y + 1)]
+    start_beams.extend([((y, max_x), west) for y in range(0, max_y + 1)])
+    start_beams.extend([((0, x), south) for x in range(0, max_x + 1)])
+    start_beams.extend([((max_y, x), north) for x in range(0, max_x + 1)])
+
+    results = []
+
+    for start_beam in start_beams:
+        beams = [start_beam]
+        go = True
+        while go:
+            new_beams = []
+            for beam in beams:
+                new_beams.extend(progress_beam(beam))
+            if len(new_beams) == 0:
+                go = False
+            else:
+                beams = new_beams
+
+        results.append(
+            len([a for a in position.values() if a.get("seen_heading") != []])
+        )
+
+        for p in position.keys():
+            position[p]["seen_heading"] = []
+
+    return max(results)
+
+
 def main_part_1(data):
     global position
     position = dict()
     for y, line in enumerate(data.strip().split("\n")):
         for x, char in enumerate(line):
-            print(y, x, char)
             position[y, x] = {"char": char, "seen_heading": []}
 
-    print(position)
     beams = [((0, -1), east)]
     go = True
     while go:
-        print("Starting loop with beams: ", beams)
         new_beams = []
         for beam in beams:
             new_beams.extend(progress_beam(beam))
-            print("Beam ", beam, "resulted in new beams", new_beams)
         if len(new_beams) == 0:
             go = False
         else:
