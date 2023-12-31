@@ -24,3 +24,8 @@ class TestAll(unittest.TestCase):
 
     def test_part_2_sample(self):
         self.assertEqual(foo.main_part_2(data=td1), 51)
+
+    def test_part_2(self):
+        with open("data.txt", "r") as f:
+            data = f.read().strip()
+        self.assertEqual(foo.main_part_2(data=data), 0)
