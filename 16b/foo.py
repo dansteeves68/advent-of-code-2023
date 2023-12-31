@@ -55,10 +55,10 @@ def main_part_2(data):
                 max_x = x
             position[y, x] = {"char": char, "seen_heading": []}
 
-    start_beams = [((y, 0), east) for y in range(0, max_y + 1)]
-    start_beams.extend([((y, max_x), west) for y in range(0, max_y + 1)])
-    start_beams.extend([((0, x), south) for x in range(0, max_x + 1)])
-    start_beams.extend([((max_y, x), north) for x in range(0, max_x + 1)])
+    start_beams = [((y, -1), east) for y in range(0, max_y + 1)]
+    start_beams.extend([((y, max_x + 1), west) for y in range(0, max_y + 1)])
+    start_beams.extend([((-1, x), south) for x in range(0, max_x + 1)])
+    start_beams.extend([((max_y + 1, x), north) for x in range(0, max_x + 1)])
 
     results = []
 
